@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PauseStart from './PauseStart';
 import Counter from './Counter';
+import Reset from './Reset';
 
 class StopWatch extends React.Component{
 
@@ -32,6 +33,16 @@ class StopWatch extends React.Component{
         }
     }
 
+    reset = () => {
+        
+            clearInterval(this.countID);
+            this.setState({
+                started: false,
+                counter: 0
+            });
+        
+    }
+
     render(){
         return(
             <div className="App">
@@ -40,7 +51,13 @@ class StopWatch extends React.Component{
                     <PauseStart 
                         startPause = {this.startPause}
                         started = {this.state.started}
-                    />    
+                    />
+                    <br/>    
+                    <Reset
+                        reset = {this.reset}
+                        started = {this.state.started}
+                        counter = {this.state.counter}
+                    />
                 </header>
             </div>
         );
