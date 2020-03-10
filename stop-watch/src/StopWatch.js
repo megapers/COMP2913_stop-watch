@@ -8,16 +8,27 @@ class StopWatch extends React.Component{
         super(props);
 
         this.state = {
-            started: false
+            started: false,
+            counter: 0
         }
     }
+
+    tick = () => {
+        let incr = 0;
+        this.setState({counter: this.state.counter+1});
+        incr++;
+    }
+
 
     startPause = () => {
         if(!this.state.started){
             this.setState({started: true});
+            this.countID = setInterval(this.tick, 10);
         }
         else{
             this.setState({started: false});
+            clearInterval(this.countID);
+
         }
     }
 
@@ -25,7 +36,7 @@ class StopWatch extends React.Component{
         return(
             <div className="App">
                 <header className="App-header">
-                    <Counter started = {this.state.started}/>
+                    <Counter counter = {this.state.counter}/>
                     <PauseStart 
                         startPause = {this.startPause}
                         started = {this.state.started}
